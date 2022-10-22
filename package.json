@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^5.0.0",
+    "@react-three/fiber": "^8.8.10",
     "gatsby": "^4.24.1",
     "gatsby-plugin-feed": "^4.24.0",
     "gatsby-plugin-manifest": "^4.24.0",
@@ -24,9 +25,11 @@
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "three": "^0.145.0"
   },
   "devDependencies": {
+    "@types/three": "^0.144.0",
     "cross-env": "^7.0.3"
   }
 }
