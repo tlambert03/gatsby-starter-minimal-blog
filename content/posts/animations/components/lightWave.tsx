@@ -16,10 +16,17 @@ interface ArrowWave {
 // - E: electric field
 // - x: position
 // - t: time
-// - A: amplitude
-// - k: wave number
-// - ω: angular frequency
-// - φ: phase
+// -----------------
+// - A: amplitude (the peak magnitude of the oscillation),
+// - k: spatial angular frequency (wavenumber) of the wave, describing how many
+//   oscillations it completes per unit of space, and related to the wavelength
+//   by the equation k = 2π/λ
+// - ω: temporal angular frequency of the wave, describing how many oscillations
+//   it completes per unit of time, and related to the period T by the equation
+//   ω = 2π/T
+// - φ: phase offset (describing how two waves can be out of sync with each other)
+
+// wave travels in the x direction with speed ω/k
 
 const ArrowWave = ({
   nVectors = 120,
