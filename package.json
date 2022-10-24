@@ -13,7 +13,8 @@
     "build:cypress": "cross-env CYPRESS_SUPPORT=y yarn build",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^5.0.0",
@@ -31,6 +32,19 @@
   "devDependencies": {
     "@react-three/drei": "^9.36.0",
     "@types/three": "^0.144.0",
-    "cross-env": "^7.0.3"
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.26.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.10",
+    "typescript": "^4.8.4"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 88
   }
 }

@@ -1,28 +1,49 @@
-import React from "react";
-import FatArrow from "./fatArrow";
-import * as THREE from "three";
+import React, { useMemo } from "react"
+import FatArrow, { FatArrowProps } from "./fatArrow"
+import * as THREE from "three"
+import { GroupProps } from "@react-three/fiber"
 
-const LightWave = ({
-  nVectors = 30,
-  spacing = 0.3,
-  wavelength = 0.2,
+interface ArrowWave {
+  nVectors?: number
+  density?: number
+  wavelength?: number
+  amplitude?: number
+  phase?: number
+  arrows?: FatArrowProps
+}
+
+// E(x, t) = A cos(kx - ωt + φ)
+// - E: electric field
+// - x: position
+// - t: time
+// - A: amplitude
+// - k: wave number
+// - ω: angular frequency
+// - φ: phase
+
+const ArrowWave = ({
+  nVectors = 120,
+  density = 60,
+  wavelength = 1,
   amplitude = 2,
   phase = 0,
   arrows = {},
-  ...props
-}) => (
-  <mesh {...props}>
-    {[...Array(nVectors).keys()].map((i) => (
-      <FatArrow
-        key={i}
-        position={[i * spacing, 0, 0]}
-        dir={
-          new THREE.Vector3(0, amplitude * Math.sin(i * wavelength + phase), 0)
-        }
-        {...arrows}
-      />
-    ))}
-  </mesh>
-);
+  ...groupprops
+}: ArrowWave & GroupProps) => {
+  const spacing = (2 * Math.PI) / density
 
-export default LightWave;
+  return (
+    <group {...groupprops}>
+      {[...Array(nVectors).keys()].map((i) => (
+        <FatArrow
+          key={i}
+          position={[i * spacing, 0, 0]}
+          dir={[0, amplitude * Math.sin(i * spacing * (1 / wavelength) + phase), 0]}
+          {...arrows}
+        />
+      ))}
+    </group>
+  )
+}
+
+export default ArrowWave
