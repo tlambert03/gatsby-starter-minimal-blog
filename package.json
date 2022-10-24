@@ -29,6 +29,7 @@
     "three": "^0.145.0"
   },
   "devDependencies": {
+    "@react-three/drei": "^9.36.0",
     "@types/three": "^0.144.0",
     "cross-env": "^7.0.3"
   }
