@@ -9,7 +9,8 @@ interface ArrowWave {
   wavelength?: number
   amplitude?: number
   phase?: number
-  arrows?: FatArrowProps
+  refractiveIndex?: number
+  arrowprops?: FatArrowProps
 }
 
 // E(x, t) = A cos(kx - ωt + φ)
@@ -37,23 +38,34 @@ function linspace(start: number, stop: number, steps: number) {
   return arr
 }
 
+const C = 2.99792 * 10 ** 14 // speed of light in microns/s
+
 const ArrowWave = ({
-  extent = 11,
-  density = 4,
-  wavelength = 1,
-  amplitude = 2,
+  extent = 2,
+  density = 40,
+  wavelength = 1,  // in a vacuum ... rather than requiring frequency
+  amplitude = 0.5,
   phase = 0,
-  arrows = {},
+  refractiveIndex = 1,
+  arrowprops: arrows = {},
   ...groupprops
 }: ArrowWave & GroupProps) => {
-  const xs = linspace(0, extent, (extent+ 1) * density)
+  const halfExtent = extent / 2
+  const xs = linspace(-halfExtent, halfExtent, (halfExtent * density) + 1)
+  const trueWaveLength = wavelength / refractiveIndex
+  const k = (2 * Math.PI) / trueWaveLength
+
+  // const frequency = C / wavelength
+  // const w = 2 * Math.PI * frequency
+  // const t = 0
+
   return (
     <group {...groupprops}>
-      {xs.map((i) => (
+      {xs.map((x) => (
         <FatArrow
-          key={i}
-          position={[i, 0, 0]}
-          dir={[0, amplitude * Math.sin(i * (1 / wavelength) + phase), 0]}
+          key={x}
+          position={[x, 0, 0]}
+          dir={[0, amplitude * Math.cos(k * x + phase), 0]}
           {...arrows}
         />
       ))}

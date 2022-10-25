@@ -17,11 +17,11 @@ const UP = new THREE.Vector3(0, 1, 0)
 export default function FatArrow({
   dir = [0, 1, 0],
   color = "#00FF00",
-  radius = 0.04,
-  coneRadius = 1,
-  coneHeight = 0.25,
+  radius = 0.01,
+  coneRadius = 1.5,
+  coneHeight = 0.05,
   radialSegments = 30,
-  opacity = 0.7,
+  opacity = 1,
   ...groupprops
 }: FatArrowProps & GroupProps) {
   const _dir = useMemo(() => new THREE.Vector3(...dir), [dir])

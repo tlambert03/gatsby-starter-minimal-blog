@@ -20,19 +20,40 @@ function LightWaves({
       <ArrowWave
         phase={phase + Math.PI / 2}
         rotation={[Math.PI / 2, 0, 0]}
-        arrows={{ color: "magenta" }}
+        arrowprops={{ color: "magenta" }}
       />
     </group>
   )
 }
 
-function Scene({ target = [6.4, 0.8, 0.8] }) {
+const GridHelper3D = ({
+  size = 2,
+  divisions = 20,
+  color1 = undefined,
+  color2 = "#CCCCCC",
+}) => {
+  return (
+    <>
+      <gridHelper args={[size, divisions, color1, color2]} />
+      <gridHelper
+        args={[size, divisions, color1, color2]}
+        rotation={[Math.PI / 2, 0, 0]}
+      />
+      <gridHelper
+        args={[size, divisions, color1, color2]}
+        rotation={[0, 0, Math.PI / 2]}
+      />
+    </>
+  )
+}
+
+//  target = [6.4, 0.8, 0.8]
+function Scene({ target = [0, 0, 0], position = [0, 0, 5] }) {
   const { camera } = useThree()
-  camera.position.set(6.7, 1, 3.6)
+  camera.position.set(...position)
 
   const ctrls = useRef<OrbitControlsType>(null!)
   useLayoutEffect(() => {
-    console.log(target)
     ctrls.current.target.set(...target)
   }, [target])
 
@@ -41,7 +62,8 @@ function Scene({ target = [6.4, 0.8, 0.8] }) {
       <ambientLight intensity={0.3} />
       <pointLight position={[2, 3, 5]} />
       <LightWaves />
-      {/* <axesHelper args={[5]} /> */}
+      <axesHelper args={[1]} />
+      <GridHelper3D />
       <OrbitControls ref={ctrls} />
     </>
   )
@@ -50,7 +72,7 @@ function Scene({ target = [6.4, 0.8, 0.8] }) {
 export default function BoxCanvas() {
   return (
     <div style={{ height: 400 }}>
-      <Canvas shadows={true}>
+      <Canvas shadows={true} orthographic={true} camera={{ zoom: 300 }}>
         <Scene />
       </Canvas>
     </div>
