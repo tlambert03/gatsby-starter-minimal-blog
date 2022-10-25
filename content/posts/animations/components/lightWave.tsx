@@ -38,7 +38,7 @@ function linspace(start: number, stop: number, steps: number) {
 }
 
 const ArrowWave = ({
-  extent = 10,
+  extent = 11,
   density = 4,
   wavelength = 1,
   amplitude = 2,
