@@ -21,7 +21,7 @@ export default function FatArrow({
   coneRadius = 1,
   coneHeight = 0.25,
   radialSegments = 30,
-  opacity = 1,
+  opacity = 0.7,
   ...groupprops
 }: FatArrowProps & GroupProps) {
   const _dir = useMemo(() => new THREE.Vector3(...dir), [dir])

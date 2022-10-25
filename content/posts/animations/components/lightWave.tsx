@@ -4,7 +4,7 @@ import * as THREE from "three"
 import { GroupProps } from "@react-three/fiber"
 
 interface ArrowWave {
-  nVectors?: number
+  extent?: number
   density?: number
   wavelength?: number
   amplitude?: number
@@ -28,24 +28,32 @@ interface ArrowWave {
 
 // wave travels in the x direction with speed ω/k
 
+function linspace(start: number, stop: number, steps: number) {
+  const arr: Array<number> = []
+  const step = (stop - start) / (steps - 1)
+  for (let i = 0; i < steps; i++) {
+    arr.push(start + step * i)
+  }
+  return arr
+}
+
 const ArrowWave = ({
-  nVectors = 120,
-  density = 60,
+  extent = 10,
+  density = 4,
   wavelength = 1,
   amplitude = 2,
   phase = 0,
   arrows = {},
   ...groupprops
 }: ArrowWave & GroupProps) => {
-  const spacing = (2 * Math.PI) / density
-
+  const xs = linspace(0, extent, (extent+ 1) * density)
   return (
     <group {...groupprops}>
-      {[...Array(nVectors).keys()].map((i) => (
+      {xs.map((i) => (
         <FatArrow
           key={i}
-          position={[i * spacing, 0, 0]}
-          dir={[0, amplitude * Math.sin(i * spacing * (1 / wavelength) + phase), 0]}
+          position={[i, 0, 0]}
+          dir={[0, amplitude * Math.sin(i * (1 / wavelength) + phase), 0]}
           {...arrows}
         />
       ))}
