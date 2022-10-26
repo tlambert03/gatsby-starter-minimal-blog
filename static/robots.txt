@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /
 
-sitemap: https://minimal-blog.lekoarts.de/sitemap-index.xml
+sitemap: https://https://noise.gatsbyjs.io//sitemap-index.xml
